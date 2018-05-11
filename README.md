@@ -4,6 +4,8 @@ An implementation of [ERC 725](https://github.com/ethereum/EIPs/issues/725) and 
 
 Using [ERC 725](https://github.com/ethereum/EIPs/issues/725), a **Smart Contract** can protect function calls from being executed unless the **Sender** has a verified **Claim** from a trusted **Issuer**.
 
+TODO: Claim, IPFS-8082
+
 ## Architecture
 
 the class diagram to make extensive use of Solidity patterns for modular code i.e. libraries, abstract contracts and multiple inheritance:
