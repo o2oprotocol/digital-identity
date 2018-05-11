@@ -36,7 +36,8 @@ const startGanache = () =>
       default_balance_ether: 100,
       db_path: 'data/db',
       network_id: 999,
-      seed: 123
+      seed: 123,
+      mnemonic: "logic cradle area quality lumber pitch radar sense dove fault capital observe"
       // blocktime: 3
     })
     server.listen(8545, err => {
