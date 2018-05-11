@@ -5,6 +5,9 @@
   "license": "MIT",
   "description": "An implementation of ERC-725 & ERC-735 for Digital Identity Blockchain. We uses the Truffle framework and Ganache CLI for testing.",
   "main": "index.js",
+  "engines": {
+    "node": ">=8.11.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/o2oprotocol/digital-identity.git"

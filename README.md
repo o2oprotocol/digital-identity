@@ -64,7 +64,7 @@ the class diagram to make extensive use of Solidity patterns for modular code i.
 
 ## Live Demo
 
-- [x] http://digital-identity.o2oprotocol.io
+- [x] http://digital-identity.o2oprotocol.com
 - [x] Certifiers provides Issuer-Services: 
   - [x] Facebook
   - [x] Linked-in
