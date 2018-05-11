@@ -60,7 +60,7 @@ async function start() {
   webpackDevServer.stderr.pipe(process.stderr)
   process.on('exit', () => webpackDevServer.kill())
 
-  const PORT = process.env.PORT || 3000
+  const PORT = process.env.PORT || 3333
   app.listen(PORT, () => {
     console.log(`\nListening on port ${PORT}\n`)
     setTimeout(() => {
