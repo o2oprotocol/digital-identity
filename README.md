@@ -66,12 +66,13 @@ the class diagram to make extensive use of Solidity patterns for modular code i.
 
 - [x] http://digital-identity.o2oprotocol.com
 - [x] Certifiers provides Issuer-Services: 
-  - [x] Facebook
-  - [x] Linked-in
-  - [x] Google
-  - [x] Github
-  - [x] Twitter 
+  - [x] [Facebook](https://developers.facebook.com/)
+  - [x] [Linked-in](https://developer.linkedin.com/)
+  - [x] [Google](https://console.cloud.google.com/apis/credentials)
+  - [x] [Github](https://github.com/settings/developers)
+  - [x] [Twitter](https://apps.twitter.com/) 
   
+
 > **Demo Scripts**
 
 Imagine we want to deploy a **Listing Contract** (e.g. post a job to hire a Freelancer), but only allow interactions from **Users** (e.g. Developers) with a verified `Has Facebook` & `Has Github`. How can we accomplish this with Digital Identity ERC-725?
