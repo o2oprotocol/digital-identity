@@ -37,7 +37,7 @@ const startGanache = () =>
       db_path: 'data/db',
       network_id: 999,
       seed: 123,
-      mnemonic: "logic cradle area quality lumber pitch radar sense dove fault capital observe"
+      // mnemonic: "logic cradle area quality lumber pitch radar sense dove fault capital observe"
       // blocktime: 3
     })
     server.listen(8545, err => {
