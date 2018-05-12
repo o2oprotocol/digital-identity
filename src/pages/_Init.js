@@ -32,24 +32,24 @@ class Event extends Component {
       this.props.reset()
       this.next('✔ Add some balance to account 1...')
       setTimeout(() => {
-        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[0], '2')
+        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[0], '5')
       }, 500)
     } else if (this.stage === 1 && balances[walletAccounts[1]].eth === '100') {
       this.next('✔ Add some balance to account 2...')
       setTimeout(() => {
-        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '2')
+        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '10')
       }, 500)
     } else if (this.stage === 2 && balances[walletAccounts[2]].eth === '100') {
       this.next('✔ Add some balance to account 3...')
       setTimeout(() => {
-        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '2')
+        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '15')
       }, 500)
     } else if (this.stage === 3 && balances[walletAccounts[2]].eth === '100') {
-      this.next('✔ Add O2O-Identity Certifier...')
+      this.next('✔ Add O2OIssuer Certifier...')
       setTimeout(() => {
         this.props.selectAccount(walletAccounts[1])
         this.props.deployIdentityContract(
-          'O2O-Identity',
+          'O2OIssuer',
           'Certifier',
           'https://digital-identity.o2oprotocol.com/fb-auth',
           false,
@@ -90,7 +90,7 @@ class Event extends Component {
     ) {
       this.next('✔ Add Claim Signer key...')
       setTimeout(() => {
-        var fb = this.props.identity.identities.find(i => i.name === 'O2O-Identity')
+        var fb = this.props.identity.identities.find(i => i.name === 'O2OIssuer')
         this.props.addKey({
           purpose: '3',
           keyType: '1',

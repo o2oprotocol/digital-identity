@@ -92,7 +92,7 @@ export function loadWallet(external) {
           web3.eth.accounts.wallet.add(key)
         )
       } else {
-        wallet = web3.eth.accounts.wallet.load('', 'originprotocol')
+        wallet = web3.eth.accounts.wallet.load('', 'o2oprotocol')
 
         var accountKeys = []
         for (var k = 0; k < wallet.length; k++) {
@@ -210,7 +210,7 @@ export function saveWallet() {
     dispatch({ type: WalletConstants.SAVE })
 
     try {
-      web3.eth.accounts.wallet.save('', 'originprotocol')
+      web3.eth.accounts.wallet.save('', 'o2oprotocol')
       dispatch({ type: WalletConstants.SAVE_SUCCESS })
     } catch (error) {
       dispatch({ type: WalletConstants.SAVE_ERROR, error })

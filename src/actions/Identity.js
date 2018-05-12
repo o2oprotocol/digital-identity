@@ -58,7 +58,7 @@ export const scheme = lookup(Schemes)
 
 export const ClaimTypes = [
   { id: '10', value: 'Full Name' },
-  { id: '11', value: 'O2O-Identity Profile' },
+  { id: '11', value: 'O2OIssuer Profile' },
   { id: '8', value: 'Email' },
   { id: '3', value: 'Has Facebook' },
   { id: '4', value: 'Has Twitter' },
