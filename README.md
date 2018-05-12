@@ -81,22 +81,19 @@ the class diagram to make extensive use of Solidity patterns for modular code i.
 
 Imagine we want to deploy a **Listing Contract** (e.g. post a job to hire a Freelancer), but only allow interactions from **Users** (e.g. Developers) with a verified `Has Facebook` & `Has Github`. How can we accomplish this with Digital Identity ERC-725?
 
-First, lets define the entities that will be interacting:
+> First, lets define the entities that will be interacting:
 * The _Consumer:Developer_ is an identity who wants to apply a posted job.
 * The _Issuer:SellerBuyerBroker_ is an identity which issues claims of type `FACEBOOK_VERIFIED` &  `GITHUB_VERIFIED`. *Note*: Buyer-Broker is HeadHunter.
 * The _Listing:JobPosting_ will only allow _Consumer:Developer_ with `FACEBOOK_VERIFIED` &  `GITHUB_VERIFIED` claims from an _Issuer-HeadHunterService_ they trust.
-<<<<<<< HEAD
 
-Second, _Consumer:Developer_ interact with a FreelancerBnB Listing Contract by following process:
+> Second, _Consumer:Developer_ interact with a O2O-Identity Listing Contract by following process:
 
 1. _Buyer:Employer_ deploys a new **Identity Contract** (or reuses one they deployed earlier).
-2.  _Buyer:Employer_ visits FreelancerBnB/verify and obtains a cryptographic signature proving that they control a particular `email` and `phone-number`.
+2.  _Buyer:Employer_ visits O2O-Identity/verify and obtains a cryptographic signature proving that they control a particular `email` and `phone-number`.
 3.  _Buyer:Employer_ adds this `Claim` to their `Identity Contract`.
-4.  _Buyer:Employer_ tries to *apply a job* via a FreelancerBnB `Listing Contract`.
-5.  `Listing Contract` looks at _Buyer:Employer_’s `Identity` for a `Claim` issued by FreelancerBnB.
-6.  `Listing Contract` recovers the public key from the `Claim Signature` and verifies it is still valid on the FreelancerBnB `Issuer Contract`.
+4.  _Buyer:Employer_ tries to *apply a job* via a O2O-Identity `Listing Contract`.
+5.  `Listing Contract` looks at _Buyer:Employer_’s `Identity` for a `Claim` issued by O2O-Identity.
+6.  `Listing Contract` recovers the public key from the `Claim Signature` and verifies it is still valid on the O2O-Identity `Issuer Contract`.
 7.  Transaction is allowed to proceed.
 
-Now that the _Buyer:Employer_ has a verified claim on their identity from FreelancerBnB, they can interact with any other contracts also accepting claims issued by FreelancerBnB.
-=======
->>>>>>> ce515d52bb59ed6e3c6c0cac5b3ec021409b8047
+Now that the _Buyer:Employer_ has a verified claim on their identity from O2O-Identity, they can interact with any other contracts also accepting claims issued by O2O-Identity.
