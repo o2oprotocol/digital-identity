@@ -1,6 +1,6 @@
 {
   "provider": "ws://localhost:8545",
-  "baseUrl": "http://localhost:3001",
+  "baseUrl": "http://localhost:3333",
   "facebookApp": {
     "client_id": "000000000000000",
     "secret": "00000000000000000000000000000000",
