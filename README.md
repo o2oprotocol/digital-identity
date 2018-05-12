@@ -4,6 +4,8 @@ An implementation of [ERC 725](https://github.com/ethereum/EIPs/issues/725) and 
 
 Using [ERC 725](https://github.com/ethereum/EIPs/issues/725), a **Smart Contract** can protect function calls from being executed unless the **Sender** has a verified **Claim** from a trusted **Issuer**; e.g. build a mechanism into our Smart Contracts to only allow interactions from reputable people. ERC-725 allows for many more use-cases, such as multi-sig execution approvals and verification by contract call instead of key validation.
 
+TODO: Claim, IPFS-8082
+
 ## Architecture
 
 the class diagram to make extensive use of Solidity patterns for modular code i.e. libraries, abstract contracts and multiple inheritance:
@@ -83,6 +85,7 @@ First, lets define the entities that will be interacting:
 * The _Consumer:Developer_ is an identity who wants to apply a posted job.
 * The _Issuer:SellerBuyerBroker_ is an identity which issues claims of type `FACEBOOK_VERIFIED` &  `GITHUB_VERIFIED`. *Note*: Buyer-Broker is HeadHunter.
 * The _Listing:JobPosting_ will only allow _Consumer:Developer_ with `FACEBOOK_VERIFIED` &  `GITHUB_VERIFIED` claims from an _Issuer-HeadHunterService_ they trust.
+<<<<<<< HEAD
 
 Second, _Consumer:Developer_ interact with a FreelancerBnB Listing Contract by following process:
 
@@ -95,3 +98,5 @@ Second, _Consumer:Developer_ interact with a FreelancerBnB Listing Contract by f
 7.  Transaction is allowed to proceed.
 
 Now that the _Buyer:Employer_ has a verified claim on their identity from FreelancerBnB, they can interact with any other contracts also accepting claims issued by FreelancerBnB.
+=======
+>>>>>>> ce515d52bb59ed6e3c6c0cac5b3ec021409b8047
