@@ -104,7 +104,7 @@ class Event extends Component {
       this.props.addKeyResponse !== 'success' &&
       nextProps.addKeyResponse === 'success'
     ) {
-      this.next('Done!')
+      this.next('✔ Done!')
       this.props.selectAccount(walletAccounts[0])
       setTimeout(() => {
         this.setState({ shouldClose: true })
