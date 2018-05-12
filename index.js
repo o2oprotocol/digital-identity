@@ -13,7 +13,7 @@ const app = express()
 
 app.get('/', (req, res) => {
   var html = fs.readFileSync(__dirname + '/public/dev.html').toString()
-  res.send(html.replace(/\{HOST\}/g, `http://${HOST}:8082/`))
+  res.send(html.replace(/\{HOST\}/g, `http://${HOST}:8081/`))
 })
 app.use(serveStatic('public'))
 
