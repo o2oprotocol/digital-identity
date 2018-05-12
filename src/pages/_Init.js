@@ -45,12 +45,12 @@ class Event extends Component {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '2')
       }, 500)
     } else if (this.stage === 3 && balances[walletAccounts[2]].eth === '100') {
-      this.next('✔ Add Freelancer certifier...')
+      this.next('✔ Add O2O-Identity Certifier...')
       setTimeout(() => {
         this.props.selectAccount(walletAccounts[1])
         this.props.deployIdentityContract(
-          'Freelancer',
-          'certifier',
+          'O2O-Identity',
+          'Certifier',
           'https://digital-identity.o2oprotocol.com/fb-auth',
           false,
           'facebook',
@@ -90,7 +90,7 @@ class Event extends Component {
     ) {
       this.next('✔ Add Claim Signer key...')
       setTimeout(() => {
-        var fb = this.props.identity.identities.find(i => i.name === 'Freelancer')
+        var fb = this.props.identity.identities.find(i => i.name === 'O2O-Identity')
         this.props.addKey({
           purpose: '3',
           keyType: '1',
