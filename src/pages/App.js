@@ -136,7 +136,7 @@ class App extends Component {
             <div className="middle">
               &copy;{' 2018 '}
               <a className="ml-1" href="https://o2oprotocol.com">
-                O2OProtocol
+                O2OProtocol Blockchain
               </a>
             </div>
             <div className="right">
