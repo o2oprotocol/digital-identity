@@ -4,7 +4,7 @@ An implementation of [ERC 725](https://github.com/ethereum/EIPs/issues/725) and 
 
 Using [ERC 725](https://github.com/ethereum/EIPs/issues/725), a **Smart Contract** can protect function calls from being executed unless the **Sender** has a verified **Claim** from a trusted **Issuer**; e.g. build a mechanism into our Smart Contracts to only allow interactions from reputable people. ERC-725 allows for many more use-cases, such as multi-sig execution approvals and verification by contract call instead of key validation.
 
-TODO: Claim, IPFS-8082
+> **Default Mnemonic**: `logic cradle area quality lumber pitch radar sense dove fault capital observe` 
 
 ## Architecture
 
