@@ -22,10 +22,10 @@ class IPFS extends Component {
           <button
             className="btn btn-outline-secondary"
             onClick={() =>
-              this.props.setIpfs('https://gateway.o2oprotocol.com', 'https://gateway.o2oprotocol.com')
+              this.props.setIpfs('https://ipfs.o2oprotocol.com', 'https://ipfs.o2oprotocol.com')
             }
           >
-            gateway.o2oprotocol.com
+            ipfs.o2oprotocol.com
           </button>
           <button className="btn btn-outline-secondary">ipfs.infura.io</button>
           <button className="btn btn-outline-secondary">gateway.ipfs.io</button>
