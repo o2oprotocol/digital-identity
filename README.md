@@ -86,14 +86,24 @@ Imagine we want to deploy a **Listing Contract** (e.g. post a job to hire a Free
 * The _Issuer:SellerBuyerBroker_ is an identity which issues claims of type `FACEBOOK_VERIFIED` &  `GITHUB_VERIFIED`. *Note*: Buyer-Broker is HeadHunter.
 * The _Listing:JobPosting_ will only allow _Consumer:Developer_ with `FACEBOOK_VERIFIED` &  `GITHUB_VERIFIED` claims from an _Issuer-HeadHunterService_ they trust.
 
-> Second, _Consumer:Developer_ interact with a O2OIssuer Listing Contract by following process:
+> Second, _Consumer:Developer_ interact with a O2OIssuer/SellerBuyerBroker Listing Contract by following process:
 
 1. _Buyer:Employer_ deploys a new **Identity Contract** (or reuses one they deployed earlier).
-2.  _Buyer:Employer_ visits O2OIssuer/verify and obtains a cryptographic signature proving that they control a particular `email` and `phone-number`.
+2.  _Buyer:Employer_ visits O2OIssuer/SellerBuyerBroker/verify and obtains a cryptographic signature proving that they control a particular `email` and `phone-number`.
 3.  _Buyer:Employer_ adds this `Claim` to their `Identity Contract`.
-4.  _Buyer:Employer_ tries to *apply a job* via a O2OIssuer `Listing Contract`.
-5.  `Listing Contract` looks at _Buyer:Employer_’s `Identity` for a `Claim` issued by O2OIssuer.
-6.  `Listing Contract` recovers the public key from the `Claim Signature` and verifies it is still valid on the O2OIssuer `Issuer Contract`.
+4.  _Buyer:Employer_ tries to *apply a job* via a O2OIssuer/SellerBuyerBroker `Listing Contract`.
+5.  `Listing Contract` looks at _Buyer:Employer_’s `Identity` for a `Claim` issued by O2OIssuer/SellerBuyerBroker.
+6.  `Listing Contract` recovers the public key from the `Claim Signature` and verifies it is still valid on the O2OIssuer/SellerBuyerBroker `Issuer Contract`.
 7.  Transaction is allowed to proceed.
 
-Now that the _Buyer:Employer_ has a verified claim on their identity from O2OIssuer, they can interact with any other contracts also accepting claims issued by O2OIssuer.
+Now that the _Buyer:Employer_ has a verified claim on their identity from O2OIssuer/SellerBuyerBroker, they can interact with any other contracts also accepting claims issued by O2OIssuer/SellerBuyerBroker.
+
+### Troubleshooting
+
+- Chrome > Console: `localStorage.clear();`
+- Chrome > URL: `chrome://settings/siteData` 
+
+## References:
+
+- [Verifiable Claims Use-Cases](https://w3c.github.io/vc-use-cases/#user-needs)
+- [blockcerts-revocation](https://github.com/WebOfTrustInfo/rebooting-the-web-of-trust-fall2017/blob/master/final-documents/blockcerts-revocation.pdf)
