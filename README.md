@@ -107,3 +107,47 @@ Now that the _Buyer:Employer_ has a verified claim on their identity from O2OIss
 
 - [Verifiable Claims Use-Cases](https://w3c.github.io/vc-use-cases/#user-needs)
 - [blockcerts-revocation](https://github.com/WebOfTrustInfo/rebooting-the-web-of-trust-fall2017/blob/master/final-documents/blockcerts-revocation.pdf)
+
+
+## Demo Walkthrough
+
+1. Screen upon loading: first Wallet-ID `0x313A` for a person who desires a blockchain identity (_Consumer:Developer_).
+
+![image](dist/README/Digital-Identity-ERC-725.png)
+
+2. Click "Add an Identity" and deploy an identity contract with name "DevOps".
+
+![image](Digital-Identity-ERC-725-New-Identity.png)
+
+You can see the address of the Contract, as well as the Wallet-ID of the Owner. 
+
+3. Switch the active wallet to the second, `0x56BE`, for the role of a service that can verify `Has Facebook` or `Has GitHub` (_Issuer:SellerBuyerBroker_).
+
+Again, you should see the address of this Contract, and the Wallet-ID of the Owner of this Contract. 
+
+4. Switch the active wallet to the third, `0xCd5e` for the role to restrict access to only people with verified Facebook/Github accounts. (A marketplace for developers)
+
+5. Click "Add a Claim Checker" and deploy a contract called "Job Posting" with certifier of `Has Facebook`. This is the contract which will be limited to interacting to people with verified Facebook accounts. 
+
+![image](Digital-Identity-ERC-725-Claim-Checker.png)
+
+6. Switch to the first Wallet, belonging to "DevOps" then Click on the `Apply Job!` Listing Contract. After clicking on "Check Claim", you should see that the claim is returned as **ClaimInvalid**. At this point, `DevOps` has no proof that has a Facebook account. 
+
+![image](Digital-Identity-ERC-725-Claim-Checker-Invalid.png)
+
+7. In right column, you should see the `Add Claim` by our "SellerBuyerBroker" Certifier  that has a Facebook account. Click "Approve" to accept this claim to Alice's identity. 
+
+![image](Digital-Identity-ERC-725-Identities-Claims-1.png)
+
+![image](Digital-Identity-ERC-725-Identities-Claims-2.png)
+
+`DevOps now has on-chain proof of `Facebook`!
+
+![image](Digital-Identity-ERC-725-Identities-Claims-3.png)
+
+8. Now click the `Job Posting` Listing Contract under `
+Claim Checkers`, and then click on `Apply Job!` then `Check Claim`; You should see that this claim is returned as **ClaimValid***. 
+
+![image](Digital-Identity-ERC-725-Claim-Checker-Valid.png)
+
+`DevOps` is ready to start doing Blockchain Freelancer Marketplace!
