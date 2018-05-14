@@ -25,58 +25,57 @@ class Event extends Component {
       nodeAccounts.length > 2 &&
       walletAccounts.length > 2 &&
       balances[walletAccounts[0]] &&
-      // balances[walletAccounts[0]].eth === '0'
       balances[walletAccounts[0]].eth === '100'
     ) {
       window.localStorage.clear()
       this.props.reset()
-      this.next('✔ Add some balance to account 1...')
+      this.next('Add some balance to account 1...')
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[0], '5')
       }, 500)
     } else if (this.stage === 1 && balances[walletAccounts[1]].eth === '100') {
-      this.next('✔ Add some balance to account 2...')
+      this.next('Add some balance to account 2...')
       setTimeout(() => {
-        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '10')
+        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '5')
       }, 500)
     } else if (this.stage === 2 && balances[walletAccounts[2]].eth === '100') {
-      this.next('✔ Add some balance to account 3...')
+      this.next('Add some balance to account 3...')
       setTimeout(() => {
-        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '15')
+        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '5')
       }, 500)
     } else if (this.stage === 3 && balances[walletAccounts[2]].eth === '100') {
-      this.next('✔ Add SellerBuyerBroker Certifier...')
+      this.next('Add SellerBuyerBroker certifier...')
       setTimeout(() => {
         this.props.selectAccount(walletAccounts[1])
         this.props.deployIdentityContract(
           'SellerBuyerBroker',
-          'Certifier',
-          'https://digital-identity.o2oprotocol.com/fb-auth',
+          'certifier',
+          'http://localhost:3001/github-auth',
           false,
-          'facebook',
+          'issuer-icon',
           [
             {
-              uri: 'https://digital-identity.o2oprotocol.com/fb-auth',
+              uri: 'http://localhost:3001/fb-auth',
               icon: 'facebook',
               claimType: '3'
             },
             {
-              uri: 'https://digital-identity.o2oprotocol.com/twitter-auth',
+              uri: 'http://localhost:3001/twitter-auth',
               icon: 'twitter',
               claimType: '4'
             },
             {
-              uri: 'https://digital-identity.o2oprotocol.com/github-auth',
+              uri: 'http://localhost:3001/github-auth',
               icon: 'github',
               claimType: '5'
             },
             {
-              uri: 'https://digital-identity.o2oprotocol.com/google-auth',
+              uri: 'http://localhost:3001/google-auth',
               icon: 'google',
               claimType: '6'
             },
             {
-              uri: 'https://digital-identity.o2oprotocol.com/linkedin-auth',
+              uri: 'http://localhost:3001/linkedin-auth',
               icon: 'linkedin',
               claimType: '9'
             }
@@ -88,14 +87,14 @@ class Event extends Component {
       this.props.createIdentityResponse !== 'success' &&
       nextProps.createIdentityResponse === 'success'
     ) {
-      this.next('✔ Add Claim Signer key...')
+      this.next('Add Claim Signer key...')
       setTimeout(() => {
         var fb = this.props.identity.identities.find(i => i.name === 'SellerBuyerBroker')
         this.props.addKey({
           purpose: '3',
           keyType: '1',
           key:
-            '0x24f3c3b01a0783948380fb683a9712f079e7d249c0461e1f40054b10b1bb0b23',
+            "0x20ea25d6c8d99bea5e81918d805b4268d950559b36c5e1cfcbb1cda0197faa08",
           identity: fb.address
         })
       }, 500)
@@ -104,7 +103,7 @@ class Event extends Component {
       this.props.addKeyResponse !== 'success' &&
       nextProps.addKeyResponse === 'success'
     ) {
-      this.next('✔ Done!')
+      this.next('Done!')
       this.props.selectAccount(walletAccounts[0])
       setTimeout(() => {
         this.setState({ shouldClose: true })
