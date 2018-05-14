@@ -6,6 +6,8 @@ import Modal from 'components/Modal'
 import { sendFromNode } from 'actions/Network'
 import { reset, deployIdentityContract, addKey } from 'actions/Identity'
 import { selectAccount } from 'actions/Wallet'
+import { callDeploy, callAddKey } from 'pages/initIssuer'
+import { setTimeout } from 'timers'
 
 class Event extends Component {
   constructor(props) {
@@ -36,50 +38,26 @@ class Event extends Component {
     } else if (this.stage === 1 && balances[walletAccounts[1]].eth === '100') {
       this.next('Add some balance to account 2...')
       setTimeout(() => {
-        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '5')
+        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '15')
       }, 500)
     } else if (this.stage === 2 && balances[walletAccounts[2]].eth === '100') {
       this.next('Add some balance to account 3...')
       setTimeout(() => {
-        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '5')
+        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '25')
       }, 500)
     } else if (this.stage === 3 && balances[walletAccounts[2]].eth === '100') {
       this.next('Add SellerBuyerBroker certifier...')
       setTimeout(() => {
         this.props.selectAccount(walletAccounts[1])
-        this.props.deployIdentityContract(
+        callDeploy(
+          this.props.deployIdentityContract,
           'SellerBuyerBroker',
-          'certifier',
-          'http://localhost:3001/github-auth',
-          false,
-          'issuer-icon',
-          [
-            {
-              uri: 'http://localhost:3001/fb-auth',
-              icon: 'facebook',
-              claimType: '3'
-            },
-            {
-              uri: 'http://localhost:3001/twitter-auth',
-              icon: 'twitter',
-              claimType: '4'
-            },
-            {
-              uri: 'http://localhost:3001/github-auth',
-              icon: 'github',
-              claimType: '5'
-            },
-            {
-              uri: 'http://localhost:3001/google-auth',
-              icon: 'google',
-              claimType: '6'
-            },
-            {
-              uri: 'http://localhost:3001/linkedin-auth',
-              icon: 'linkedin',
-              claimType: '9'
-            }
-          ]
+          'https://digital-identity.o2oprotocol.com'
+        )
+        callDeploy(
+          this.props.deployIdentityContract,
+          'LocalBroker',
+          'http://localhost:3001'
         )
       }, 500)
     } else if (
@@ -89,14 +67,17 @@ class Event extends Component {
     ) {
       this.next('Add Claim Signer key...')
       setTimeout(() => {
-        var fb = this.props.identity.identities.find(i => i.name === 'SellerBuyerBroker')
-        this.props.addKey({
-          purpose: '3',
-          keyType: '1',
-          key:
-            "0x20ea25d6c8d99bea5e81918d805b4268d950559b36c5e1cfcbb1cda0197faa08",
-          identity: fb.address
-        })
+        const broker = this.props.identity.identities.find(
+          i => i.name === 'SellerBuyerBroker'
+        )
+        const local = this.props.identity.identities.find(
+          i => i.name === 'LocalBroker'
+        )
+        console.log('broker, local', broker, local)
+        const key =
+          '0x20ea25d6c8d99bea5e81918d805b4268d950559b36c5e1cfcbb1cda0197faa08'
+        callAddKey(this.props.addKey, key, broker.address)
+        callAddKey(this.props.addKey, key, local.address)
       }, 500)
     } else if (
       this.stage === 5 &&
