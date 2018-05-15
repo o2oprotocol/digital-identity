@@ -66,7 +66,7 @@ class Event extends Component {
       setTimeout(() => {
         const identity = this.props.identity.identities.find(i => i.name === broker)
         const key =
-          '0x20ea25d6c8d99bea5e81918d805b4268d950559b36c5e1cfcbb1cda0197faa08'
+          '0x2d1da9eb632a0a8052bb8c23aac7b482afbc7bd06ef97b8a0a54a943fa68cdfd'
         callAddKey(this.props.addKey, key, identity.address)
       }, 500)
     } else if (

@@ -1,6 +1,5 @@
 import express from 'express'
 import serveStatic from 'serve-static'
-// import { spawn } from 'child_process'
 import spawn from "cross-spawn"
 import Ganache from 'ganache-core'
 import opener from 'opener'
