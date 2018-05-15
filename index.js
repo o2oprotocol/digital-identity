@@ -64,7 +64,7 @@ async function start() {
 
   const PORT = process.env.PORT || 3333
   app.listen(PORT, () => {
-    console.log(`\nListening on port ${PORT}\n`)
+    console.log(`\nListening on host ${HOST}, port ${PORT}\n`)
     setTimeout(() => {
       try{
         const browser = opener(`http://${HOST}:${PORT}`)
