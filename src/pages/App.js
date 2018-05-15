@@ -46,13 +46,13 @@ class App extends Component {
         // "0x24f3c3b01a0783948380fb683a9712f079e7d249c0461e1f40054b10b1bb0b23", // accounts[0] ClaimSignerKey
         "0xd6079ba5123c57b9a8cb3e1fbde9f879c7a18eeca23fa2a965e8181d3ff59f0c",    // accounts[1] Identity
         "0x20ea25d6c8d99bea5e81918d805b4268d950559b36c5e1cfcbb1cda0197faa08",    // accounts[2] Certifier
-        "0x25acb0da38f5364588f78b4e1f33c4a3981354c9b044d64bf201aad8f38f50ae",    // accounts[3] ClaimChecker
+        "0x25acb0da38f5364588f78b4e1f33c4a3981354c9b044d64bf201aad8f38f50ae",
       ])
       this.props.loadWallet()
       this.setState({ preloaded: true })
       this.hideNotice = setTimeout(
         () => this.setState({ preloaded: false }),
-        3000
+        3333
       )
     }
   }

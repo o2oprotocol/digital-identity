@@ -5,6 +5,7 @@ import Ganache from 'ganache-core'
 import opener from 'opener'
 import fs from 'fs'
 import Web3 from 'web3'
+import path from "path"
 
 import simpleIssuer from './issuer-services/_simple'
 
@@ -13,7 +14,7 @@ const app = express()
 
 app.get('/', (req, res) => {
   var html = fs.readFileSync(__dirname + '/public/dev.html').toString()
-  res.send(html.replace(/\{HOST\}/g, `http://${HOST}:8081/`))
+  res.send(html.replace(/\{HOST\}/g, `http://${HOST}:8082/`))
 })
 app.use(serveStatic('public'))
 
@@ -37,7 +38,7 @@ const startGanache = () =>
       db_path: 'data/db',
       network_id: 999,
       seed: 123,
-      // mnemonic: "logic cradle area quality lumber pitch radar sense dove fault capital observe"
+      mnemonic: "logic cradle area quality lumber pitch radar sense dove fault capital observe"
       // blocktime: 3
     })
     server.listen(8545, err => {
@@ -51,11 +52,12 @@ const startGanache = () =>
 
 async function start() {
   await startGanache()
-  const webpackDevServer = spawn('./node_modules/.bin/webpack-dev-server', [
+  const cmd = path.join(__dirname, "node_modules", ".bin", "webpack-dev-server")
+  const webpackDevServer = spawn(cmd, [
     '--info=false',
     '--port=8082',
     '--host=0.0.0.0'
-  ])
+  ], { shell: true })
   webpackDevServer.stdout.pipe(process.stdout)
   webpackDevServer.stderr.pipe(process.stderr)
   process.on('exit', () => webpackDevServer.kill())

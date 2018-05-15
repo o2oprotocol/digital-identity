@@ -6,6 +6,8 @@ import Modal from 'components/Modal'
 import { sendFromNode } from 'actions/Network'
 import { reset, deployIdentityContract, addKey } from 'actions/Identity'
 import { selectAccount } from 'actions/Wallet'
+import { callDeploy, callAddKey } from 'pages/initIssuer'
+import { setTimeout } from 'timers'
 
 class Event extends Component {
   constructor(props) {
@@ -25,62 +27,37 @@ class Event extends Component {
       nodeAccounts.length > 2 &&
       walletAccounts.length > 2 &&
       balances[walletAccounts[0]] &&
-      // balances[walletAccounts[0]].eth === '0'
       balances[walletAccounts[0]].eth === '100'
     ) {
       window.localStorage.clear()
       this.props.reset()
-      this.next('✔ Add some balance to account 1...')
+      this.next('Add some balance to account 1...')
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[0], '5')
       }, 500)
     } else if (this.stage === 1 && balances[walletAccounts[1]].eth === '100') {
-      this.next('✔ Add some balance to account 2...')
+      this.next('Add some balance to account 2...')
       setTimeout(() => {
-        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '10')
+        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '15')
       }, 500)
     } else if (this.stage === 2 && balances[walletAccounts[2]].eth === '100') {
-      this.next('✔ Add some balance to account 3...')
+      this.next('Add some balance to account 3...')
       setTimeout(() => {
-        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '15')
+        this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '25')
       }, 500)
     } else if (this.stage === 3 && balances[walletAccounts[2]].eth === '100') {
-      this.next('✔ Add SellerBuyerBroker Certifier...')
+      this.next('Add SellerBuyerBroker certifier...')
       setTimeout(() => {
         this.props.selectAccount(walletAccounts[1])
-        this.props.deployIdentityContract(
+        callDeploy(
+          this.props.deployIdentityContract,
           'SellerBuyerBroker',
-          'Certifier',
-          'https://digital-identity.o2oprotocol.com/fb-auth',
-          false,
-          'facebook',
-          [
-            {
-              uri: 'https://digital-identity.o2oprotocol.com/fb-auth',
-              icon: 'facebook',
-              claimType: '3'
-            },
-            {
-              uri: 'https://digital-identity.o2oprotocol.com/twitter-auth',
-              icon: 'twitter',
-              claimType: '4'
-            },
-            {
-              uri: 'https://digital-identity.o2oprotocol.com/github-auth',
-              icon: 'github',
-              claimType: '5'
-            },
-            {
-              uri: 'https://digital-identity.o2oprotocol.com/google-auth',
-              icon: 'google',
-              claimType: '6'
-            },
-            {
-              uri: 'https://digital-identity.o2oprotocol.com/linkedin-auth',
-              icon: 'linkedin',
-              claimType: '9'
-            }
-          ]
+          'https://digital-identity.o2oprotocol.com'
+        )
+        callDeploy(
+          this.props.deployIdentityContract,
+          'LocalBroker',
+          'http://localhost:3001'
         )
       }, 500)
     } else if (
@@ -88,23 +65,26 @@ class Event extends Component {
       this.props.createIdentityResponse !== 'success' &&
       nextProps.createIdentityResponse === 'success'
     ) {
-      this.next('✔ Add Claim Signer key...')
+      this.next('Add Claim Signer key...')
       setTimeout(() => {
-        var fb = this.props.identity.identities.find(i => i.name === 'SellerBuyerBroker')
-        this.props.addKey({
-          purpose: '3',
-          keyType: '1',
-          key:
-            '0x24f3c3b01a0783948380fb683a9712f079e7d249c0461e1f40054b10b1bb0b23',
-          identity: fb.address
-        })
+        const broker = this.props.identity.identities.find(
+          i => i.name === 'SellerBuyerBroker'
+        )
+        const local = this.props.identity.identities.find(
+          i => i.name === 'LocalBroker'
+        )
+        console.log('broker, local', broker, local)
+        const key =
+          '0x20ea25d6c8d99bea5e81918d805b4268d950559b36c5e1cfcbb1cda0197faa08'
+        callAddKey(this.props.addKey, key, broker.address)
+        callAddKey(this.props.addKey, key, local.address)
       }, 500)
     } else if (
       this.stage === 5 &&
       this.props.addKeyResponse !== 'success' &&
       nextProps.addKeyResponse === 'success'
     ) {
-      this.next('✔ Done!')
+      this.next('Done!')
       this.props.selectAccount(walletAccounts[0])
       setTimeout(() => {
         this.setState({ shouldClose: true })
