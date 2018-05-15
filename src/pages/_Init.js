@@ -51,13 +51,13 @@ class Event extends Component {
         this.props.selectAccount(walletAccounts[1])
         callDeploy(
           this.props.deployIdentityContract,
-          'SellerBuyerBroker',
-          'https://digital-identity.o2oprotocol.com'
+          'LocalBroker',
+          'http://localhost:3001'
         )
         callDeploy(
           this.props.deployIdentityContract,
-          'LocalBroker',
-          'http://localhost:3001'
+          'SellerBuyerBroker',
+          'https://digital-identity.o2oprotocol.com'
         )
       }, 500)
     } else if (
