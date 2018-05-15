@@ -15,7 +15,7 @@ import { spawnSync } from 'child_process';
 
 dotenv.config()
 const HOST = process.env.HOST || 'localhost'
-const RESET= process.env.RESET || false
+const RESET= JSON.parse(process.env.RESET)
 const app = express()
 
 app.get('/', (req, res) => {
@@ -75,12 +75,14 @@ async function start() {
     console.log(`\nListening on host ${HOST}, port ${PORT}\n`)
     setTimeout(() => {
       try{
-        const browser = opener(`http://${HOST}:${PORT}`)
+        const url = `http://${HOST}:${PORT}`
+        console.log(`Opening Browser at ${url}`)
+        const browser = opener(url)
         browser.unref();
       }catch(err){
         console.log("open browser", err.message);
       }
-    }, 2500)
+    }, 4500)
   })
 }
 

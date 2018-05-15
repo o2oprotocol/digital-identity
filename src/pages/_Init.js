@@ -19,13 +19,13 @@ class Event extends Component {
   componentWillReceiveProps(nextProps) {
     var nodeAccounts = nextProps.network.accounts,
       walletAccounts = nextProps.wallet.accounts,
-      balances = nextProps.wallet.balances
+      balances = nextProps.wallet.balances;
 
-    const RESET = process.env.RESET || true
-    const IS_LOCAL_BROKER = process.env.IS_LOCAL_BROKER || true
+    const RESET = JSON.parse(process.env.RESET)
+    const LOCAL = JSON.parse(process.env.IS_LOCAL_BROKER)
 
-    const broker = IS_LOCAL_BROKER ? "LocalBroker" : "SellerBuyerBroker"
-    const uri    = IS_LOCAL_BROKER ? "http://localhost:3001" : "https://digital-identity.o2oprotocol.com"
+    const broker = LOCAL ? "LocalBroker" : "SellerBuyerBroker"
+    const uri    = LOCAL ? "http://localhost:3001" : "https://digital-identity.o2oprotocol.com"
 
     if (
       this.stage === 0 &&
