@@ -1,6 +1,7 @@
 import express from 'express'
 import serveStatic from 'serve-static'
-import { spawn } from 'child_process'
+// import { spawn } from 'child_process'
+import spawn from "cross-spawn"
 import Ganache from 'ganache-core'
 import opener from 'opener'
 import fs from 'fs'
@@ -57,7 +58,7 @@ async function start() {
     '--info=true',
     '--port=8082',
     '--host=0.0.0.0'
-  ], { shell: true })
+  ])
   webpackDevServer.stdout.pipe(process.stdout)
   webpackDevServer.stderr.pipe(process.stderr)
   process.on('exit', () => webpackDevServer.kill())
