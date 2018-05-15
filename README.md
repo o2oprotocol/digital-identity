@@ -53,11 +53,29 @@ the class diagram to make extensive use of Solidity patterns for modular code i.
   
 ## Local Development
 
+> NVM & Yarn
+```              
+nvm install v9.11.1   &&
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - &&
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list &&
+sudo apt-get update && sudo apt-get install yarn
+```
+
 > Installation
 ```
-  yarn install &&
+  # 
+  git clone https://github.com/o2oprotocol/digital-identity &&
+  cd digital-identity                                       &&
+  nvm use v9.11.1 && yarn install
+```
+
+> Run
+```
+  nvm use v9.11.1 &&
+  yarn clean &&
   yarn start
 ```
+
 > Tests
 ```
   yarn test 
