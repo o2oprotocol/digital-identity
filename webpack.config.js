@@ -1,5 +1,8 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
+const dotenv = require( "dotenv")
+
+dotenv.config()
 
 var OfficialIdentities = []
 try {
@@ -45,7 +48,11 @@ var config = {
   },
   mode: 'development',
   plugins: [
-    new webpack.EnvironmentPlugin({ HOST: 'localhost' }),
+    new webpack.EnvironmentPlugin({ 
+      HOST: 'localhost',
+      RESET: true,
+      IS_LOCAL_BROKER: true
+     }),
     new webpack.DefinePlugin({
       OfficialIdentities: JSON.stringify(OfficialIdentities)
     })

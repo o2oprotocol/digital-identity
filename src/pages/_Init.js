@@ -21,13 +21,19 @@ class Event extends Component {
       walletAccounts = nextProps.wallet.accounts,
       balances = nextProps.wallet.balances
 
+    const RESET = process.env.RESET || true
+    const IS_LOCAL_BROKER = process.env.IS_LOCAL_BROKER || true
+
+    const broker = IS_LOCAL_BROKER ? "LocalBroker" : "SellerBuyerBroker"
+    const uri    = IS_LOCAL_BROKER ? "http://localhost:3001" : "https://digital-identity.o2oprotocol.com"
+
     if (
       this.stage === 0 &&
       nextProps.network.status === 'connected' &&
       nodeAccounts.length > 2 &&
       walletAccounts.length > 2 &&
       balances[walletAccounts[0]] &&
-      balances[walletAccounts[0]].eth === '100'
+      RESET
     ) {
       window.localStorage.clear()
       this.props.reset()
@@ -35,30 +41,21 @@ class Event extends Component {
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[0], '5')
       }, 500)
-    } else if (this.stage === 1 && balances[walletAccounts[1]].eth === '100') {
+    } else if (this.stage === 1 && RESET) {
       this.next('✔ Add some balance to account 2...')
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '15')
       }, 500)
-    } else if (this.stage === 2 && balances[walletAccounts[2]].eth === '100') {
+    } else if (this.stage === 2 && RESET) {
       this.next('✔ Add some balance to account 3...')
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '25')
       }, 500)
-    } else if (this.stage === 3 && balances[walletAccounts[2]].eth === '100') {
-      this.next('✔ Add SellerBuyerBroker certifier...')
+    } else if (this.stage === 3 && RESET) {
+      this.next(`✔ Add ${broker} certifier...`)
       setTimeout(() => {
         this.props.selectAccount(walletAccounts[1])
-        callDeploy(
-          this.props.deployIdentityContract,
-          'LocalBroker',
-          'http://localhost:3001'
-        )
-        callDeploy(
-          this.props.deployIdentityContract,
-          'SellerBuyerBroker',
-          'https://digital-identity.o2oprotocol.com'
-        )
+        callDeploy(this.props.deployIdentityContract, broker, uri)
       }, 500)
     } else if (
       this.stage === 4 &&
@@ -67,17 +64,10 @@ class Event extends Component {
     ) {
       this.next('✔ Add Claim Signer key...')
       setTimeout(() => {
-        const broker = this.props.identity.identities.find(
-          i => i.name === 'SellerBuyerBroker'
-        )
-        const local = this.props.identity.identities.find(
-          i => i.name === 'LocalBroker'
-        )
-        console.log('broker, local', broker, local)
+        const identity = this.props.identity.identities.find(i => i.name === broker)
         const key =
           '0x20ea25d6c8d99bea5e81918d805b4268d950559b36c5e1cfcbb1cda0197faa08'
-        callAddKey(this.props.addKey, key, local.address)
-        callAddKey(this.props.addKey, key, broker.address)
+        callAddKey(this.props.addKey, key, identity.address)
       }, 500)
     } else if (
       this.stage === 5 &&

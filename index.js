@@ -7,10 +7,14 @@ import opener from 'opener'
 import fs from 'fs'
 import Web3 from 'web3'
 import path from "path"
+import dotenv from "dotenv"
 
 import simpleIssuer from './issuer-services/_simple'
+import { spawnSync } from 'child_process';
 
+dotenv.config()
 const HOST = process.env.HOST || 'localhost'
+const RESET= process.env.RESET || false
 const app = express()
 
 app.get('/', (req, res) => {
@@ -28,10 +32,16 @@ try {
 
 const startGanache = () =>
   new Promise((resolve, reject) => {
+    if(RESET){
+      console.log("Ganache > Reset")
+      spawn.sync("rm -rf data/db")
+    }
     try {
       fs.mkdirSync('./data/db')
     } catch (e) {
       /* Ignore */
+      console.log("mkdir data/db FAIL", e.message)
+      process.exit();
     }
     var server = Ganache.server({
       total_accounts: 5,

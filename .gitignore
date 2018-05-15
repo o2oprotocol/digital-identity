@@ -13,3 +13,6 @@ issuer-services/up.json
 issuer-services/config.json
 # VSCode
 .vscode
+
+# Environment file
+.env
