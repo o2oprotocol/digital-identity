@@ -8,6 +8,7 @@ import fs from 'fs'
 import Web3 from 'web3'
 import path from "path"
 import dotenv from "dotenv"
+import shelljs from "shelljs"
 
 import simpleIssuer from './issuer-services/_simple'
 import { spawnSync } from 'child_process';
@@ -32,17 +33,13 @@ try {
 
 const startGanache = () =>
   new Promise((resolve, reject) => {
+    const dataDir = path.join(__dirname, "data", "db")
     if(RESET){
       console.log("Ganache > Reset")
-      spawn.sync("rm -rf data/db")
+      shelljs.rm("-rf",  dataDir)
     }
-    try {
-      fs.mkdirSync('./data/db')
-    } catch (e) {
-      /* Ignore */
-      console.log("mkdir data/db FAIL", e.message)
-      process.exit();
-    }
+    shelljs.mkdir("-p", dataDir)
+    
     var server = Ganache.server({
       total_accounts: 5,
       default_balance_ether: 100,
