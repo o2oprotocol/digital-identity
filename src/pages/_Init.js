@@ -37,17 +37,17 @@ class Event extends Component {
     ) {
       window.localStorage.clear()
       this.props.reset()
-      this.next('✔ Add some balance to account 1...')
+      this.next('✔ Init Identity Account 1...')
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[0], '5')
       }, 500)
     } else if (this.stage === 1 && RESET) {
-      this.next('✔ Add some balance to account 2...')
+      this.next('✔ Init ClaimIssuer Account 2...')
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '15')
       }, 500)
     } else if (this.stage === 2 && RESET) {
-      this.next('✔ Add some balance to account 3...')
+      this.next('✔ Init ClaimChecker Account 3...')
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '25')
       }, 500)
