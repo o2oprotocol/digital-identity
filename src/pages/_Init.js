@@ -31,22 +31,22 @@ class Event extends Component {
     ) {
       window.localStorage.clear()
       this.props.reset()
-      this.next('Add some balance to account 1...')
+      this.next('✔ Add some balance to account 1...')
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[0], '5')
       }, 500)
     } else if (this.stage === 1 && balances[walletAccounts[1]].eth === '100') {
-      this.next('Add some balance to account 2...')
+      this.next('✔ Add some balance to account 2...')
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[1], '15')
       }, 500)
     } else if (this.stage === 2 && balances[walletAccounts[2]].eth === '100') {
-      this.next('Add some balance to account 3...')
+      this.next('✔ Add some balance to account 3...')
       setTimeout(() => {
         this.props.sendFromNode(nodeAccounts[0].hash, walletAccounts[2], '25')
       }, 500)
     } else if (this.stage === 3 && balances[walletAccounts[2]].eth === '100') {
-      this.next('Add SellerBuyerBroker certifier...')
+      this.next('✔ Add SellerBuyerBroker certifier...')
       setTimeout(() => {
         this.props.selectAccount(walletAccounts[1])
         callDeploy(
@@ -65,7 +65,7 @@ class Event extends Component {
       this.props.createIdentityResponse !== 'success' &&
       nextProps.createIdentityResponse === 'success'
     ) {
-      this.next('Add Claim Signer key...')
+      this.next('✔ Add Claim Signer key...')
       setTimeout(() => {
         const broker = this.props.identity.identities.find(
           i => i.name === 'SellerBuyerBroker'
@@ -76,8 +76,8 @@ class Event extends Component {
         console.log('broker, local', broker, local)
         const key =
           '0x20ea25d6c8d99bea5e81918d805b4268d950559b36c5e1cfcbb1cda0197faa08'
-        callAddKey(this.props.addKey, key, broker.address)
         callAddKey(this.props.addKey, key, local.address)
+        callAddKey(this.props.addKey, key, broker.address)
       }, 500)
     } else if (
       this.stage === 5 &&

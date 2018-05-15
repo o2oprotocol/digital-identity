@@ -14,7 +14,7 @@ const app = express()
 
 app.get('/', (req, res) => {
   var html = fs.readFileSync(__dirname + '/public/dev.html').toString()
-  res.send(html.replace(/\{HOST\}/g, `http://${HOST}:8082/`))
+  res.send(html.replace(/\{HOST\}/g, `http://${HOST}:8081/`))
 })
 app.use(serveStatic('public'))
 
@@ -55,7 +55,7 @@ async function start() {
   const cmd = path.join(__dirname, "node_modules", ".bin", "webpack-dev-server")
   const webpackDevServer = spawn(cmd, [
     '--info=false',
-    '--port=8082',
+    '--port=8081',
     '--host=0.0.0.0'
   ], { shell: true })
   webpackDevServer.stdout.pipe(process.stdout)
@@ -72,7 +72,7 @@ async function start() {
       }catch(err){
         console.log("open browser", err.message);
       }
-    }, 2000)
+    }, 2500)
   })
 }
 

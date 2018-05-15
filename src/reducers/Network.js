@@ -3,14 +3,14 @@ import { NetworkConstants } from 'actions/Network'
 import Providers from 'constants/Providers'
 
 const HOST = process.env.HOST || 'localhost'
-let ipfsGateway = 'https://gateway.originprotocol.com',
-  ipfsRPC = 'https://gateway.originprotocol.com',
+let ipfsGateway = 'https://ipfs.o2oprotocol.com',
+  ipfsRPC = 'https://ipfs.o2oprotocol.com',
   provider = 'https://rinkeby.infura.io',
   browserProvider = false
 
 if (process.env.NODE_ENV !== 'production') {
-  ipfsGateway = `http://${HOST}:9090`
-  ipfsRPC = `http://${HOST}:5002`
+  ipfsGateway = `http://${HOST}:8081`
+  ipfsRPC = `http://${HOST}:5001`
   provider = `http://${HOST}:8545`
 }
 

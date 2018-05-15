@@ -16,7 +16,7 @@ const Versions = () => (
     {oldVersions.map(({ version, hash }) => (
       <a
         key={hash}
-        href={`https://gateway.originprotocol.com/ipfs/${hash}`}
+        href={`https://ipfs.o2oprotocol.com/ipfs/${hash}`}
         className="dropdown-item"
         onClick={() => {}}
       >
