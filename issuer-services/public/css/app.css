@@ -384,7 +384,7 @@ table.table .btn-sm {
   opacity: 0.4;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
   filter: alpha(opacity=40);
-  height: 12px;
+  height: 1.5em;
   margin-top: -2px;
   margin-right: 0.25rem;
 }
