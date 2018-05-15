@@ -15,4 +15,4 @@ issuer-services/config.json
 .vscode
 
 # Environment file
-.env
+#.env

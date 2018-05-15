@@ -21,8 +21,8 @@ class Event extends Component {
       walletAccounts = nextProps.wallet.accounts,
       balances = nextProps.wallet.balances;
 
-    const RESET = JSON.parse(process.env.RESET)
-    const LOCAL = JSON.parse(process.env.IS_LOCAL_BROKER)
+    const RESET = process.env.RESET === "true"
+    const LOCAL = process.env.LOCAL === "true"
 
     const broker = LOCAL ? "LocalBroker" : "SellerBuyerBroker"
     const uri    = LOCAL ? "http://localhost:3001" : "https://digital-identity.o2oprotocol.com"

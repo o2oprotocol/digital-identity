@@ -53,6 +53,7 @@
     "shelljs": "^0.8.2",
     "solc": "^0.4.22",
     "superagent": "^3.8.2",
+    "sync-request": "^6.0.0",
     "web3": "^1.0.0-beta.34"
   },
   "prettier": {

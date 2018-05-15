@@ -11,10 +11,21 @@ import shelljs from "shelljs"
 
 import simpleIssuer from './issuer-services/_simple'
 import { spawnSync } from 'child_process';
+import syncReq from "sync-request"
 
 dotenv.config()
-const HOST = process.env.HOST || 'localhost'
-const RESET= JSON.parse(process.env.RESET)
+const LOCAL = process.env.LOCAL === "true"
+const RESET= process.env.RESET === "true"
+
+let HOST = "localhost"
+if(!LOCAL){
+  try{
+    HOST = syncReq("GET", "http://ipinfo.io/ip").getBody('utf8').trim()
+  }catch(e){
+    /* Ignore */
+  }
+}
+
 const app = express()
 
 app.get('/', (req, res) => {
@@ -38,7 +49,6 @@ const startGanache = () =>
       shelljs.rm("-rf",  dataDir)
     }
     shelljs.mkdir("-p", dataDir)
-    
     var server = Ganache.server({
       total_accounts: 5,
       default_balance_ether: 100,

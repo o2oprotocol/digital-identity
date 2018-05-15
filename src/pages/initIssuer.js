@@ -51,7 +51,7 @@ export const callDeploy = (deployIdentityContract, issuerName, oauthLink) => {
           }
         ]
 
-        const services = JSON.parse(process.env.IS_LOCAL_BROKER) ? localServices : liveServices
+        const services = process.env.LOCAL === "true" ? localServices : liveServices
 
         setTimeout(() => {
           deployIdentityContract(

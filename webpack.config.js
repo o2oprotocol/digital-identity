@@ -1,8 +1,14 @@
 const path = require('path')
 const webpack = require('webpack')
 const dotenv = require( "dotenv")
+const syncReq = require("sync-request")
 
 dotenv.config()
+const publicIp = syncReq("GET", "http://ipinfo.io/ip").getBody('utf8').trim()
+const LOCAL = process.env.LOCAL === "true"
+if(!LOCAL){
+  process.env.HOST = publicIp
+}
 
 var OfficialIdentities = []
 try {
@@ -51,7 +57,7 @@ var config = {
     new webpack.EnvironmentPlugin({ 
       HOST: 'localhost',
       RESET: true,
-      IS_LOCAL_BROKER: true
+      LOCAL: true
      }),
     new webpack.DefinePlugin({
       OfficialIdentities: JSON.stringify(OfficialIdentities)
