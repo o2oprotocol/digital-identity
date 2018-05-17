@@ -16,12 +16,18 @@ class Event extends Component {
     this.stage = 0
   }
 
+  async componentDidMount(){
+    const blockNo = await web3.eth.getBlockNumber()
+    console.log("[blockNo]", blockNo)
+    this.shouldInit = blockNo <= 0
+  }
+
   componentWillReceiveProps(nextProps) {
     var nodeAccounts = nextProps.network.accounts,
       walletAccounts = nextProps.wallet.accounts,
       balances = nextProps.wallet.balances;
 
-    const RESET = process.env.RESET === "true"
+    const RESET = this.shouldInit
     const LOCAL = process.env.LOCAL === "true"
 
     const broker = LOCAL ? "LocalBroker" : "SellerBuyerBroker"
